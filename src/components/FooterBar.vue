@@ -1,16 +1,8 @@
-<script setup lang='ts'>
-import { useRoute } from 'vue-router'
-
-const route = useRoute()
-</script>
-
 <template>
   <div class="mt-10 mb-6 prose m-auto opacity-50 flex">
-    <span class="text-sm"><a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="color:inherit">CC BY-NC-SA 4.0</a> 2022-PRESENT © younggglcy</span>
-    <div class="flex-auto" />
+    <span class="text-sm">
+      <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="color:inherit">CC BY-NC-SA 4.0</a>
+      <span ml-2>2022-PRESENT © younggglcy</span>
+    </span>
   </div>
 </template>
-
-<style scoped>
-
-</style>
