@@ -24,3 +24,5 @@
 或者发[邮件](mailto:younggglcy@gmail.com)给我
 
 欢迎任何出于友好目的的交流
+
+> 本站源码位于 [GitHub repo](https://github.com/younggglcy/blog)，用到的所有 icon 均来自于 [Iconify](https://iconify.design/)，使用且遵循各自的 LICENSE
