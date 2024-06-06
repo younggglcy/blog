@@ -25,4 +25,5 @@
 
 欢迎任何出于友好目的的交流
 
-> 本站源码位于 [GitHub repo](https://github.com/younggglcy/blog)，用到的所有 icon 均来自于 [Iconify](https://iconify.design/)，使用且遵循各自的 LICENSE
+> 本站源码位于 [GitHub repo](https://github.com/younggglcy/blog)，用到的所有 icon 均来自于 [Iconify](https://iconify.design/)，使用且遵循各自的 LICENSE。
+[favicon.ico](/favicon.ico) 来自 [favicon.io](https://favicon.io/emoji-favicons/ghost)
