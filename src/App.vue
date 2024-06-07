@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useHead } from '@vueuse/head'
+import { SpeedInsights } from '@vercel/speed-insights/vue'
 
 useHead({
   title: 'younggglcy\'s blog',
@@ -7,6 +8,7 @@ useHead({
 </script>
 
 <template>
+  <SpeedInsights />
   <div>
     <nav-bar />
     <main>
