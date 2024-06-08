@@ -3,6 +3,9 @@ import { useWindowScroll, watchThrottled } from '@vueuse/core'
 import { useHead } from '@vueuse/head'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import BackToTop from './BackToTop.vue'
+import FooterBar from './FooterBar.vue'
+import ProgressBar from './ProgressBar.vue'
 import type { FrontMatter } from '~/types'
 import { getOffsetTop } from '~/utils'
 
@@ -125,7 +128,7 @@ onUnmounted(() => {
     </div>
     <ClientOnly>
       <BackToTop />
-      <ProgressBar v-if="showProgress" :el="articleEl" />
+      <ProgressBar v-if="showProgress && articleEl" :el="articleEl" />
     </ClientOnly>
     <FooterBar />
   </div>

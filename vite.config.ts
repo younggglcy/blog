@@ -52,7 +52,6 @@ export default defineConfig({
       resolvers: [
         IconsResolver(),
       ],
-      dts: true,
     }),
 
     Icons(),

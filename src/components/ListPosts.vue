@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { computed, ref, unref } from 'vue'
+import PostItem from './PostItem.vue'
 import { parseDate } from '~/lib/day'
 import type { Post } from '~/types'
 import { vInfiniteScroll } from '~/directives'
@@ -61,7 +62,7 @@ const posts = computed(() => {
       </span>
     </div>
     <main v-infinite-scroll="load" overflow-auto>
-      <post-item v-for="post in posts" :key="post.path" v-bind="post" @tag-click="selectTag" />
+      <PostItem v-for="post in posts" :key="post.path" v-bind="post" @tag-click="selectTag" />
     </main>
   </div>
 </template>

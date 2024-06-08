@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import ToggleTheme from './ToggleTheme.vue'
+</script>
+
 <template>
   <header z-24>
     <router-link
@@ -26,7 +30,7 @@
         <a href="/feed.xml" target="_blank" title="RSS" class="lt-md:hidden">
           <div i-la-rss-square style="font-size:1.25rem; margin: 0 -0.125rem;" />
         </a>
-        <toggle-theme />
+        <ToggleTheme />
       </div>
     </nav>
   </header>
