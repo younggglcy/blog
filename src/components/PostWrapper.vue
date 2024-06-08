@@ -133,6 +133,9 @@ onUnmounted(() => {
 
 <style>
 .highlight-title {
-  color: darkgreen !important;
+  color: aqua !important;
+}
+html:not(.dark) .highlight-title {
+  color: orangered !important;
 }
 </style>

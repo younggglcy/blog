@@ -73,7 +73,7 @@ a.name = 'zhangsan'
 4. 如果函数没有返回其他对象，那么 new 表达式中的函数调用会自动返回这个新对象
 
 上个图:
-<img src="/images/prototype1.png" rounded-lg />
+<img src="/images/prototype1.png" rounded-lg alt="prototype description graph" />
 
 ### 内部插槽
 
@@ -93,7 +93,7 @@ a.name = 'zhangsan'
 原型对象默认只会拥有一个不可枚举的 constructor 属性，它的值是对构造函数的引用
 
 更新一下上图
-<img src="/images/prototype2.png" rounded-lg />
+<img src="/images/prototype2.png" rounded-lg alt="prototype description graph" />
 
 举个例子直观地理解一下
 
@@ -129,13 +129,13 @@ console.log(Parent.prototype.constructor) // Proto
 const o = {}
 o.constructor === Object // true
 
-const o = new Object
+const o = new Object()
 o.constructor === Object // true
 
 const a = []
 a.constructor === Array // true
 
-const a = new Array
+const a = []
 a.constructor === Array // true
 
 const n = new Number(3)
@@ -145,7 +145,7 @@ n.constructor === Number // true
 
 读者可能已经想到了，如果一个对象实例的构造函数封装了其他的构造函数，会怎么样呢？恭喜你，这就是原型链最大的秘密所在！
 
-<img src="/images/prototype3.png" rounded-lg />
+<img src="/images/prototype3.png" rounded-lg alt="prototype description graph" />
 
 原型对象通过[[ Prototype ]]串联起来，形成一个原型链
 
@@ -295,8 +295,8 @@ console.log(child2)
 console.log(Object.getPrototypeOf(child2))
 ```
 
-<img src="/images/prototype4-light.png" img-light rounded-lg />
-<img src="/images/prototype4-dark.png" img-dark rounded-lg />
+<img src="/images/prototype4-light.png" img-light rounded-lg alt="the result of the codes above" />
+<img src="/images/prototype4-dark.png" img-dark rounded-lg alt="the result of the codes above" />
 
 这个问题出现的关键点在于这一行代码
 
@@ -319,8 +319,8 @@ Parent.prototype = Object.create(Proto.prototype)
 
 再看看控制台
 
-<img src="/images/prototype5-light.png" img-light rounded-lg />
-<img src="/images/prototype5-dark.png" img-dark rounded-lg />
+<img src="/images/prototype5-light.png" img-light rounded-lg alt="the result of the codes above" />
+<img src="/images/prototype5-dark.png" img-dark rounded-lg alt="the result of the codes above" />
 
 `Object.create()` 干了什么事？看看它的简易 `Polyfill` 代码，相信你就明白了
 

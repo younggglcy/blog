@@ -9,12 +9,22 @@ function toggleDark() {
 </script>
 
 <template>
-  <a class="select-none" title="Toggle Color Scheme" @click="toggleDark">
+  <div class="container-div" title="Toggle Color Scheme" @click="toggleDark">
     <div v-show="isDark" i-ri-moon-line />
     <div v-show="!isDark" i-ri-sun-line />
-  </a>
+  </div>
 </template>
 
 <style scoped>
+.container-div {
+  cursor: pointer;
+  color: inherit;
+  transition: opacity 0.2s ease;
+  opacity: 0.6;
+  outline: none;
+}
 
+.container-div:hover {
+  opacity: 1;
+}
 </style>

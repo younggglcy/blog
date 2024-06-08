@@ -5,6 +5,7 @@
       class="text-[2em]"
       to="/"
       focusable="false"
+      aria-label="Home"
     >
       <div i-emojione:cat-face class="hover:scale-120 transition duration-300" />
     </router-link>
@@ -12,11 +13,11 @@
       <div class="spacer" />
       <div class="right">
         <router-link to="/posts" title="Blog">
-          <span class="lt-sm:hidden">Blog</span>
+          <span class="lt-sm:hidden darker">Blog</span>
           <div i-ri-article-line sm:hidden />
         </router-link>
         <router-link to="/friends" title="friends' link" class="lt-sm:hidden">
-          <span class="lt-sm:hidden">Friends</span>
+          <span class="lt-sm:hidden darker">Friends</span>
           <div i-fa-solid:user-friends sm:hidden />
         </router-link>
         <a href="https://github.com/younggglcy" target="_blank" title="GitHub">
@@ -63,5 +64,9 @@
 
 .nav .right > * {
   margin: auto;
+}
+
+html:not(.dark) .darker {
+  color: #111;
 }
 </style>

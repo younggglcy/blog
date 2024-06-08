@@ -26,7 +26,7 @@ pre.shiki span[class*="highlighted"] {
 }
 
 .prose {
-  --fg: #555;
+  --fg: #4b4b4b;
   --fg-deep: #222;
   --fg-deeper: #000;
 
@@ -54,9 +54,9 @@ pre.shiki span[class*="highlighted"] {
 }
 
 html.dark .prose {
-  --fg: #aaa;
-  --fg-deep: #bbb;
-  --fg-deeper: #ccc;
+  --fg: #bbb;
+  --fg-deep: #ccc;
+  --fg-deeper: #efefef;
 }
 
 a.item {

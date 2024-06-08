@@ -158,8 +158,8 @@ if (debug) {
 
 即在 debug 模式下，会在控制台打印解析出来的命令，不会执行。我们可以试试，以 `ni` 本身项目为例子
 
-<img src="/images/ni-1-dark.png" rounded-lg img-dark />
-<img src="/images/ni-1-light.png" rounded-lg img-light />
+<img src="/images/ni-1-dark.png" rounded-lg img-dark alt="ni debug mode example" />
+<img src="/images/ni-1-light.png" rounded-lg img-light alt="ni debug mode example" />
 
 ### 02 -C option
 
@@ -176,8 +176,8 @@ if (args[0] === '-C') {
 
 同样的，举个例子
 
-<img src="/images/ni-2-dark.png" rounded-lg img-dark />
-<img src="/images/ni-2-light.png" rounded-lg img-light />
+<img src="/images/ni-2-dark.png" rounded-lg img-dark alt="ni with -C option" />
+<img src="/images/ni-2-light.png" rounded-lg img-light alt="ni with -C option" />
 
 `-C ni` 代表我们切换到了 `projects/ni` 目录
 

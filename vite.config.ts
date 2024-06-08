@@ -71,7 +71,7 @@ export default defineConfig({
           slugify,
           permalink: Anchor.permalink.linkInsideHeader({
             symbol: '#',
-            renderAttrs: () => ({ 'aria-hidden': 'true' }),
+            renderAttrs: () => ({ 'aria-hidden': 'true', 'tabIndex': -1 }),
           }),
         })
 
