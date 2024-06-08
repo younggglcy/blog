@@ -10,8 +10,7 @@ export function isScroll(el: HTMLElement, isVertical?: boolean): boolean {
   return ['scroll', 'auto', 'overlay'].some(s => overflow.includes(s))
 }
 
-export function getScrollContainer(el: HTMLElement,
-  isVertical?: boolean): Window | HTMLElement | undefined {
+export function getScrollContainer(el: HTMLElement, isVertical?: boolean): Window | HTMLElement | undefined {
   let parent: HTMLElement = el
   while (parent) {
     if ([window, document, document.documentElement].includes(parent))
@@ -38,7 +37,6 @@ export function getOffsetTop(el: HTMLElement) {
   return offset
 }
 
-export function getOffsetTopDistance(el: HTMLElement,
-  containerEl: HTMLElement) {
+export function getOffsetTopDistance(el: HTMLElement, containerEl: HTMLElement) {
   return Math.abs(getOffsetTop(el) - getOffsetTop(containerEl))
 }

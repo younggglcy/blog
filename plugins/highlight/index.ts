@@ -85,7 +85,7 @@ const highlightPlugin: MarkdownIt.PluginWithOptions<ShikiExtraOptions> = (md, op
     let darkLineOptions: HtmlRendererOptions['lineOptions'] = []
     let lightLineOptions: HtmlRendererOptions['lineOptions'] = []
 
-    const highlightLinesRE = /{(.+)}/
+    const highlightLinesRE = /\{(.+)\}/
     if (attrs.match(highlightLinesRE)) {
       const matchedAttrs = highlightLinesRE.exec(attrs)![1]
       if (darkMode) {
@@ -98,8 +98,8 @@ const highlightPlugin: MarkdownIt.PluginWithOptions<ShikiExtraOptions> = (md, op
     const diffLineOptions: HtmlRendererOptions['lineOptions'] = []
     const darkDiffLineOptions: HtmlRendererOptions['lineOptions'] = []
     const lightDiffLineOptions: HtmlRendererOptions['lineOptions'] = []
-    const minusLinesRE = /\/{2} \[\!code {2}-{2}\]/gm
-    const plusLinesRE = /\/{2} \[\!code {2}\+{2}]/gm
+    const minusLinesRE = /\/{2} \[!code {2}-{2}\]/g
+    const plusLinesRE = /\/{2} \[!code {2}\+{2}\]/g
     if (code.match(minusLinesRE)) {
       const codeArr = code.split('\n')
       codeArr.forEach((line, index) => {

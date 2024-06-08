@@ -16,7 +16,7 @@ export function attrsToLines(attrs: string, classname?: string | string[]): Html
 
   attrs
     .split(',')
-    .map(v => v.split('-').map(v => parseInt(v, 10)))
+    .map(v => v.split('-').map(v => Number.parseInt(v, 10)))
     .forEach(([start, end]) => {
       if (start && end) {
         result.push(
@@ -44,8 +44,7 @@ export function attrsToLines(attrs: string, classname?: string | string[]): Html
   }))
 }
 
-export function mergeLineOptions(source: HtmlRendererOptions['lineOptions'],
-  target: HtmlRendererOptions['lineOptions']): HtmlRendererOptions['lineOptions'] {
+export function mergeLineOptions(source: HtmlRendererOptions['lineOptions'], target: HtmlRendererOptions['lineOptions']): HtmlRendererOptions['lineOptions'] {
   target!.forEach(({ line, classes = [] }) => {
     let lo = 0
     let hi = source!.length - 1
