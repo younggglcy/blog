@@ -13,7 +13,15 @@ const { frontmatter } = defineProps<{
   frontmatter: FrontMatter
 }>()
 
-useHead({ title: frontmatter.title })
+useHead({
+  title: frontmatter.title,
+  meta: [
+    {
+      name: 'keywords',
+      content: frontmatter.tags?.join(', '),
+    },
+  ],
+})
 
 const route = useRoute()
 const router = useRouter()
