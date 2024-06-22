@@ -1,11 +1,3 @@
-html.dark .shiki.github-light {
-  display: none;
-}
-
-html:not(.dark) .shiki.github-dark {
-  display: none;
-}
-
 pre.shiki span[class*="highlighted"] {
   margin: 0 -24px;
   padding: 0 24px;
@@ -13,16 +5,12 @@ pre.shiki span[class*="highlighted"] {
   display: inline-block;
 }
 
-.github-dark .highlighted-dark {
+.github-dark .highlighted {
   background-color: teal;
 }
 
-.github-light .highlighted-light {
+.github-light .highlighted {
   background-color: lightsalmon;
-}
-
-.prose .shiki {
-  font-size: 1.1em;
 }
 
 .prose {
@@ -31,6 +19,24 @@ pre.shiki span[class*="highlighted"] {
   --fg-deeper: #000;
 
   color: var(--fg);
+}
+
+html.dark .prose pre.shiki {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+html.dark .prose pre.shiki span[class="line"] span {
+  color: var(--shiki-dark);
+}
+
+html:not(.dark) .prose pre.shiki {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+html:not(.dark) .prose pre.shiki span[class="line"] span {
+  color: var(--shiki-light);
 }
 
 .prose a {

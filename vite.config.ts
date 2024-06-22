@@ -13,7 +13,11 @@ import Anchor from 'markdown-it-anchor'
 import LinkAttributes from 'markdown-it-link-attributes'
 import TOC from 'markdown-it-table-of-contents'
 import Inspect from 'vite-plugin-inspect'
-import Shiki from 'markdown-it-shiki-extra'
+import Shiki from '@shikijs/markdown-it'
+import {
+  transformerMetaHighlight,
+  transformerNotationDiff,
+} from '@shikijs/transformers'
 import { slugify } from './scripts/slugify'
 import { getLastUpdateTime } from './scripts/utils'
 
@@ -65,7 +69,7 @@ export default defineConfig({
       markdownItOptions: {
         quotes: '""\'\'',
       },
-      markdownItSetup(md) {
+      async markdownItSetup(md) {
         md.use(Anchor, {
           slugify,
           permalink: Anchor.permalink.linkInsideHeader({
@@ -87,19 +91,22 @@ export default defineConfig({
           slugify,
         })
 
-        // inspired by markdown-it-shiki
-        md.use(Shiki, {
-          theme: {
+        md.use(await Shiki({
+          themes: {
             dark: 'github-dark',
             light: 'github-light',
           },
           langs: [
             'javascript',
             'typescript',
-            'yaml',
             'json',
           ],
-        })
+          transformers: [
+            transformerMetaHighlight(),
+            transformerNotationDiff(),
+          ],
+          defaultColor: false,
+        }))
       },
     }),
   ],
