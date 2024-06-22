@@ -83,7 +83,7 @@ export default defineConfig({
         })
 
         md.use(TOC, {
-          includeLevel: [1, 2, 3],
+          includeLevel: [1, 2, 3, 4],
           slugify,
         })
 
