@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import it from 'markdown-it'
+import MarkdownIt from 'markdown-it'
 
 const props = defineProps<{
   date: string
@@ -15,8 +15,7 @@ defineEmits<{
   (e: 'tagClick', name: string): void
 }>()
 
-// eslint-disable-next-line new-cap
-const md = new it()
+const md = new MarkdownIt()
 const desc = md.render(props.description)
 </script>
 

@@ -21,9 +21,6 @@ import {
 import { slugify } from './scripts/slugify'
 import { getLastUpdateTime } from './scripts/utils'
 
-// TODO: move markdown-it-shiki-extra to highlightPlugin
-// import { highlightPlugin } from './plugins/highlight'
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
