@@ -38,9 +38,12 @@ const allPostsRoutes: Post[] = router.getRoutes()
 const allPostsNum = allPostsRoutes.length
 
 function load() {
-  initialNum.value + 2 <= allPostsNum
-    ? initialNum.value += 2
-    : initialNum.value = allPostsNum
+  if (initialNum.value + 2 <= allPostsNum) {
+    initialNum.value += 2
+  }
+  else {
+    initialNum.value = allPostsNum
+  }
 }
 
 const posts = computed(() => {
