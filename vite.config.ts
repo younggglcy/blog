@@ -96,6 +96,8 @@ export default defineConfig({
           langs: [
             'javascript',
             'typescript',
+            'tsx',
+            'mermaid',
             'json',
           ],
           transformers: [
