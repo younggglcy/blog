@@ -45,7 +45,7 @@ description: '本文分入门、进阶、深入三个章节，循序渐进地介
     class Animal {
       type: string
       constructor(type: string) {
-    	  this.type = type
+        this.type = type
       }
       
       greet() {
@@ -86,7 +86,7 @@ description: '本文分入门、进阶、深入三个章节，循序渐进地介
     class Animal {
       type: string
       constructor(type: string) {
-    	  this.type = type
+        this.type = type
       }
     
       @yelling
@@ -455,7 +455,7 @@ function (ctor, descriptorIn, decorators, contextIn, initializers, extraInitiali
 
 在上一章，我们从 TS Playground 看到了 TS 编译后的产物。但好奇的你可能会继续发问：TS 是如何将代码编译成这个样子的呢？TS 对于装饰器语法，在编译器内，又是如何处理的呢？那这个时候，我们就需要 clone TS 源码过来阅读一下了。
 
-<img src="/images/ts-decoratormodern_complier_constction.jpeg" rounded-lg>
+<img src="./assets-TS-decorator/ts-decoratormodern_complier_constction.jpeg" rounded-lg>
 
 附上 TS/C# 作者 Anders 在数年前一场关于现代编译器架构的 Talk 中，手绘的一张图。
 
@@ -477,7 +477,7 @@ TypeScript 的源码相对比较多，深究技术细节的话，可能很容易
 
 笔者准备的 demo 项目也相当简单，目录结构如下：
 
-<img src="/images/ts-decoratorimage.png" rounded-lg>
+<img src="./assets-TS-decorator/ts-decoratorimage.png" rounded-lg>
 
 `src/index.ts` 使用了「入门」篇中的例子，稍做修改免去了类型错误：
 
@@ -485,7 +485,7 @@ TypeScript 的源码相对比较多，深究技术细节的话，可能很容易
 class Animal {
   type: string
   constructor(type: string) {
-	  this.type = type
+    this.type = type
   }
 
   @yelling
@@ -542,7 +542,7 @@ xcat.greet() // meow~ meow~
 
 不难发现，`src/compiler/program.ts` L1853，在创建 Program 时，会处理项目根级入口。
 
-<img src="/images/ts-decoratorimage 1.png" rounded-lg />
+<img src="./assets-TS-decorator/ts-decoratorimage 1.png" rounded-lg />
 
 此步骤在经过一系列必要处理后，最终由 `src/compiler/parser.ts` 的 `createSourceFile` 方法，将源文件处理成 `SourceFile` 对象。
 
@@ -552,11 +552,11 @@ Lexer，也即 Lexical Analyzer，其主要职责为词法分析，把原文件�
 
 scanner 的 `scan` 方法，是取 token 的逻辑。
 
-<img src="/images/ts-decoratorimage 2.png" rounded-lg>
+<img src="./assets-TS-decorator/ts-decoratorimage 2.png" rounded-lg>
 
 `scan` 取了当前位置的码点值，根据码点值，匹配不同的处理逻辑。返回的 token 是名为 `SyntaxKind` 的枚举。
 
-<img src="/images/ts-decoratorimage 3.png" rounded-lg>
+<img src="./assets-TS-decorator/ts-decoratorimage 3.png" rounded-lg>
 
 从上图可以看到，对于装饰器的场景，`@` 和函数名是作为两个单独 token 存在的，前者为 AtToken 标识，后者为 Identifier。我们不妨大胆猜测，在 Parser 阶段，会把这两个 token 组合成一个 AST Node。
 
@@ -568,20 +568,20 @@ TypeScript Parser 是一种 **Recursive Descent Parser**，这种 Parser 主要�
 
 下面，让我们来研究一下，Parser 是如何工作的，并以装饰器为例，观察 token → AST Node 的过程。
 
-<img src="/images/ts-decoratorimage 4.png" rounded-lg>
+<img src="./assets-TS-decorator/ts-decoratorimage 4.png" rounded-lg>
 
 如上图源码，Parser 在创建 SourceFile 的过程中，会将源文件以 `ParsingContext` 为粒度，解析获得 statements，再由 `createSourceFile` ，得到包含 AST 信息的 SourceFile 对象。
 
 ParsingContext 是一个枚举，可理解为 Parser 进行递归语法分析的作用域，此处 TypeScript 源码注释写得十分清晰。
 
-<img src="/images/ts-decoratorimage 5.png" rounded-lg>
+<img src="./assets-TS-decorator/ts-decoratorimage 5.png" rounded-lg>
 
 
 ### parseList
 
 TypeScript 递归下降解析语法的步骤，就体现在 `parseList` 函数上。
 
-<img src="/images/ts-decoratorimage 6.png" rounded-lg>
+<img src="./assets-TS-decorator/ts-decoratorimage 6.png" rounded-lg>
 
 
 每个不同的 ParsingContext，其入口都是 `parseList` 函数。
@@ -593,21 +593,21 @@ TypeScript 递归下降解析语法的步骤，就体现在 `parseList` 函数�
 
 Parser 在递归调用中，会对每个 classElement，检查其 modifiers。
 
-<img src="/images/ts-decoratorimage 7.png" rounded-lg>
+<img src="./assets-TS-decorator/ts-decoratorimage 7.png" rounded-lg>
 
 
 此时，Parser 在处理完 `constructor` 的 AST Node 后，scanner 的当前 token 来到了 AtToken。Parser 发现了 AtToken 的存在，会尝试去解析装饰器语法，和我们预想的一致。
 
-<img src="/images/ts-decoratorimage 8.png" rounded-lg>
+<img src="./assets-TS-decorator/ts-decoratorimage 8.png" rounded-lg>
 
-<img src="/images/ts-decoratorimage 9.png" rounded-lg>
+<img src="./assets-TS-decorator/ts-decoratorimage 9.png" rounded-lg>
 
 
 scanner 取了下一个 token，该 token 为 identifier(demo 中的 `yelling`)，于是，identifier 根据 token 信息，从 factory 中创建出一个 AST Node，挂在装饰器 Node 的 expression 字段上，大功告成。
 
 最终，parseList 将 demo 中的 `src/index.ts` ，按照根级 `ParsingContext` ，分成了 5 个根级 AST Node，如同 astexplorer 和 ts-ast-viewer 所展示的那样。
 
-<img src="/images/ts-decoratorimage 10.png" rounded-lg>
+<img src="./assets-TS-decorator/ts-decoratorimage 10.png" rounded-lg>
 
 
 结合这些信息，Parser 便完成了 SourceFile 的创建。
@@ -620,7 +620,7 @@ scanner 取了下一个 token，该 token 为 identifier(demo 中的 `yelling`)�
 
 在 codegen 管线中，每个 SourceFile 都会被 `transformers` 依次转换，得到最后的结果交给 Printer 生成文字，写入磁盘。
 
-<img src="/images/ts-decoratorimage 11.png" rounded-lg>
+<img src="./assets-TS-decorator/ts-decoratorimage 11.png" rounded-lg>
 
 
 如上图，tranformers 管线将 SourceFile 的 AST，转换成了另一颗 AST。
@@ -628,14 +628,14 @@ scanner 取了下一个 token，该 token 为 identifier(demo 中的 `yelling`)�
 > TypeScript Playground 中，可开启插件查看 Transform 各阶段的情况。但遗憾的是，截止写作此段的当天（2024-10-05），此插件无法作用在 demo 代码上。
 > 
 > 
-> <img src="/images/ts-decoratorimage 12.png" rounded-lg>
+> <img src="./assets-TS-decorator/ts-decoratorimage 12.png" rounded-lg>
 > 
 
 对于装饰器语法来说，对应的 Transformer 为源码中的 `src/compiler/transformers/esDecorators.ts` 。每个 transformer 的核心，都在于其 `visitor` 方法。esDecorators 文件的 visitor 方法，针对 tc39 decorator stage3 proposal 具体规则，做了相应的实现。esDecorators Transform 之后，AST 就会带有 `__runInitializers`，`__esDecorate` 这些 Node。
 
 以 demo 代码为例，SourceFile 中的 SyntaxKind.ClassDeclaration 结构的 AST Node（即 class 声明那一块）会被 `visitClassDeclaration` 处理返回。
 
-<img src="/images/ts-decoratorimage 13.png" rounded-lg>
+<img src="./assets-TS-decorator/ts-decoratorimage 13.png" rounded-lg>
 
 
 由于没有可视的 AST 结构，以笔者的水平，光靠 debugger 剖析过于困难，此处等哪天心血来潮了再详细完善吧。

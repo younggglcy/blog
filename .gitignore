@@ -30,3 +30,8 @@ components.d.ts
 auto-imports.d.ts
 
 vite.config.ts.timestamp-*
+
+.yalc
+yalc.lock
+
+temp

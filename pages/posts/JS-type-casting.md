@@ -57,7 +57,7 @@ description: '主要对 JS 的类型转换规则进行了大体阐述，以经�
 
 附上经典图片一张：
 
-<img alt="thanks for inventing javascript" src="/images/thanks-for-inventing-javascript.jpg" rounded-lg >
+<img alt="thanks for inventing javascript" src="./assets-JS-type-casting/thanks-for-inventing-javascript.jpg" rounded-lg >
 
 > 简单讲解一下不涉及到类型转换的坑
 >
@@ -65,8 +65,8 @@ description: '主要对 JS 的类型转换规则进行了大体阐述，以经�
 >
 >    `console.log(Object.getOwnPropertyDescriptor(window, NaN))`在 Chrome 控制台下结果是
 >
->    <img src="/images/type-casting1-dark.png" rounded-lg img-dark alt="the result of console.log(Object.getOwnPropertyDescriptor(window, NaN))" />
->    <img src="/images/type-casting1-light.png" rounded-lg img-light alt="the result of console.log(Object.getOwnPropertyDescriptor(window, NaN))" />
+>    <img src="./assets-JS-type-casting/type-casting1-dark.png" rounded-lg img-dark alt="the result of console.log(Object.getOwnPropertyDescriptor(window, NaN))" />
+>    <img src="./assets-JS-type-casting/type-casting1-light.png" rounded-lg img-light alt="the result of console.log(Object.getOwnPropertyDescriptor(window, NaN))" />
 >    `NaN` 意为 *not a number*，但其实 ECMA 标准将其归于 Number 的范畴，所以不用过于纠结这个问题。<a src="https://262.ecma-international.org/5.1/#sec-4.3.23" target="_blank">可参考这里</a>
 >
 > 2. 关于好几个 9 变成 10 的 n 次方，是由于绝对值大于或等于 2^53 的数值文本过大，无法用整数准确表示
