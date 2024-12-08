@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useHead } from '@vueuse/head'
 import { SpeedInsights } from '@vercel/speed-insights/vue'
+import { useHead } from '@vueuse/head'
 import NavBar from '~/components/NavBar.vue'
 
 useHead({

@@ -1,7 +1,7 @@
 // this is a fork from the impletions of element-plus
 import type { ComponentPublicInstance, ObjectDirective } from 'vue'
-import { nextTick } from 'vue'
 import { throttle } from 'lodash-es'
+import { nextTick } from 'vue'
 import { getOffsetTopDistance, getScrollContainer } from '~/utils'
 
 const SCOPE = 'InfiniteScroll'
