@@ -1,13 +1,13 @@
 <script setup lang="ts">
+import type { FrontMatter } from '~/types'
 import { useWindowScroll, watchThrottled } from '@vueuse/core'
 import { useHead } from '@vueuse/head'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { getOffsetTop } from '~/utils'
 import BackToTop from './BackToTop.vue'
 import FooterBar from './FooterBar.vue'
 import ProgressBar from './ProgressBar.vue'
-import type { FrontMatter } from '~/types'
-import { getOffsetTop } from '~/utils'
 
 const { frontmatter } = defineProps<{
   frontmatter: FrontMatter

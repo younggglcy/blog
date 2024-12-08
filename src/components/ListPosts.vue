@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import { computed, ref, unref } from 'vue'
-import PostItem from './PostItem.vue'
-import { parseDate } from '~/lib/day'
 import type { Post } from '~/types'
+import { computed, ref, unref } from 'vue'
+import { useRouter } from 'vue-router'
 import { vInfiniteScroll } from '~/directives'
+import { parseDate } from '~/lib/day'
+import PostItem from './PostItem.vue'
 
 const router = useRouter()
 

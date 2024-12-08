@@ -1,5 +1,5 @@
-import { execaCommandSync } from 'execa'
 import dayjs from 'dayjs'
+import { execaCommandSync } from 'execa'
 
 export function getLastUpdateTime(filePath: string) {
   if (!/\/posts\/(?!index)/.test(filePath))
