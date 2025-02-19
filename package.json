@@ -44,7 +44,7 @@
     "markdown-it-table-of-contents": "^0.9.0",
     "simple-git-hooks": "^2.11.1",
     "typescript": "^5.7.3",
-    "unocss": "^0.65.4",
+    "unocss": "^65.5.0",
     "unplugin-icons": "^22.0.0",
     "unplugin-vue-components": "^28.1.0",
     "unplugin-vue-markdown": "^28.3.0",
