@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.5.2",
+  "packageManager": "pnpm@10.6.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite-ssg build && esno ./scripts/rss.ts",
@@ -17,8 +17,8 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.5.1",
-    "@iconify/json": "^2.2.313",
+    "@antfu/eslint-config": "^4.6.0",
+    "@iconify/json": "^2.2.314",
     "@shikijs/markdown-it": "^3.1.0",
     "@shikijs/transformers": "^3.1.0",
     "@types/fs-extra": "^11.0.4",
