@@ -51,7 +51,7 @@
     "vite": "^6.2.3",
     "vite-plugin-inspect": "^11.0.0",
     "vite-plugin-pages": "^0.32.5",
-    "vite-ssg": "^25.2.0",
+    "vite-ssg": "^26.0.0",
     "vue-tsc": "https://pkg.pr.new/vuejs/language-tools/vue-tsc@3fb59af"
   },
   "simple-git-hooks": {
