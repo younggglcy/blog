@@ -33,7 +33,7 @@
     "esno": "^4.8.0",
     "execa": "^9.5.2",
     "fast-glob": "^3.3.3",
-    "feed": "^4.2.2",
+    "feed": "^5.0.0",
     "fs-extra": "^11.3.0",
     "gray-matter": "^4.0.3",
     "lint-staged": "^15.5.0",
