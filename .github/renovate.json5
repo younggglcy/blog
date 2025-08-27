@@ -1,6 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>younggglcy/renovate-config"],
-  "automerge": true,
-  "schedule": "0 0 1 * *"
+  "extends": [
+    "github>younggglcy/renovate-config",
+    "schedule:automergeMonthly"
+  ],
+  "automerge": true
 }
