@@ -97,8 +97,8 @@ importers:
         specifier: ^4.0.1
         version: 4.0.1
       markdown-it-table-of-contents:
-        specifier: ^0.9.0
-        version: 0.9.0
+        specifier: ^1.0.0
+        version: 1.0.0
       simple-git-hooks:
         specifier: ^2.12.1
         version: 2.12.1
@@ -2124,9 +2124,8 @@ packages:
   markdown-it-link-attributes@4.0.1:
     resolution: {integrity: sha512-pg5OK0jPLg62H4k7M9mRJLT61gUp9nvG0XveKYHMOOluASo9OEF13WlXrpAp2aj35LbedAy3QOCgQCw0tkLKAQ==}
 
-  markdown-it-table-of-contents@0.9.0:
-    resolution: {integrity: sha512-PKtgvLweW/PXj8Pg2EfJM9qANbYqchxOiZy+70kLKFfCL4IkdlMzc53Z4Yj2ABw45MEzrXUSHh+4Cs2tDjwEig==}
-    engines: {node: '>6.4.0'}
+  markdown-it-table-of-contents@1.0.0:
+    resolution: {integrity: sha512-pMmsCONq/MgkCBk0C1eWBMIuNvuRmLQeb6OJJWTfzLXrVcTYuTBwldaKRafru4ILt6ViZg86OSmYDJNH0mUwfQ==}
 
   markdown-it@14.1.0:
     resolution: {integrity: sha512-a54IwgWPaeBCAAsv13YgmALOF1elABB08FxO9i+r4VFk5Vl4pKokRPeX8u5TCgSsPi6ec1otfLjdOpVcgbpshg==}
@@ -5151,7 +5150,7 @@ snapshots:
 
   markdown-it-link-attributes@4.0.1: {}
 
-  markdown-it-table-of-contents@0.9.0: {}
+  markdown-it-table-of-contents@1.0.0: {}
 
   markdown-it@14.1.0:
     dependencies:
