@@ -44,6 +44,13 @@ onMounted(() => {
       behavior: 'smooth',
     })
   }
+  else if (isPostsRoute) {
+    // Scroll to top when navigating to a post without a hash
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }
   const toc = document.querySelector('article .table-of-contents')
   if (isPostsRoute && toc) {
     const lists = Array.from(toc.querySelectorAll<HTMLAnchorElement>('li > a'))
