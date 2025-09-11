@@ -2,8 +2,8 @@
 import type { FrontMatter } from '~/types'
 import { useWindowScroll, watchThrottled } from '@vueuse/core'
 import { useHead } from '@vueuse/head'
-import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { computed, onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { getOffsetTop } from '~/utils'
 import BackToTop from './BackToTop.vue'
 import FooterBar from './FooterBar.vue'
@@ -24,7 +24,6 @@ useHead({
 })
 
 const route = useRoute()
-const router = useRouter()
 
 // the vite-plugin-vue-markdown plugin will only parse
 // native frontmatter of the markdown file
@@ -47,9 +46,6 @@ onMounted(() => {
   const toc = document.querySelector('article .table-of-contents')
   if (isPostsRoute && toc) {
     const lists = Array.from(toc.querySelectorAll<HTMLAnchorElement>('li > a'))
-
-    for (const item of lists)
-      item.addEventListener('click', handleClick)
 
     // highlight current title
     const names = lists.map(i => decodeURIComponent(i.hash).slice(1))
@@ -83,29 +79,6 @@ onMounted(() => {
         immediate: true,
       },
     )
-  }
-})
-
-function handleClick(this: HTMLAnchorElement, e: MouseEvent) {
-  e.preventDefault()
-  router.replace({
-    path: route.path,
-    hash: decodeURIComponent(this.hash),
-  })
-
-  const el = document.querySelector<HTMLElement>(`${decodeURIComponent(this.hash)}`)!
-  el.scrollIntoView({
-    behavior: 'smooth',
-  })
-}
-
-onUnmounted(() => {
-  const toc = document.querySelector('article .table-of-contents')
-  if (isPostsRoute && toc) {
-    const lists = Array.from(toc.querySelectorAll<HTMLAnchorElement>('li > a'))
-
-    for (const item of lists)
-      item.removeEventListener('click', handleClick)
   }
 })
 </script>

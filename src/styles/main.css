@@ -16,6 +16,7 @@ html.dark {
 
 html {
   overflow: scroll;
+  scroll-behavior: smooth;
 }
 
 * {
