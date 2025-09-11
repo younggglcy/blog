@@ -24,6 +24,10 @@ import ToggleTheme from './ToggleTheme.vue'
           <span class="lt-sm:hidden darker">Friends</span>
           <div i-fa-solid:user-friends sm:hidden />
         </router-link>
+        <router-link to="/use" title="Use">
+          <span class="lt-sm:hidden darker">Use</span>
+          <div clarity:tools-solid sm:hidden />
+        </router-link>
         <a href="https://github.com/younggglcy" target="_blank" title="GitHub">
           <div i-uil-github-alt />
         </a>
