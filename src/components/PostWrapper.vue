@@ -43,6 +43,12 @@ onMounted(() => {
       behavior: 'smooth',
     })
   }
+  else {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }
   const toc = document.querySelector('article .table-of-contents')
   if (isPostsRoute && toc) {
     const lists = Array.from(toc.querySelectorAll<HTMLAnchorElement>('li > a'))
