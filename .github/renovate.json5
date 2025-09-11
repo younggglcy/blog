@@ -3,6 +3,5 @@
   "extends": [
     "github>younggglcy/renovate-config",
     "schedule:automergeMonthly"
-  ],
-  "automerge": true
+  ]
 }
