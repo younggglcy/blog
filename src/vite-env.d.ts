@@ -14,5 +14,6 @@ declare module 'vue-router' {
   }
   interface RouteMeta {
     frontmatter: FrontMatter
+    filename: string
   }
 }

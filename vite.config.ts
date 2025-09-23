@@ -1,4 +1,4 @@
-import { resolve } from 'node:path'
+import { basename, resolve } from 'node:path'
 import Shiki from '@shikijs/markdown-it'
 import {
   transformerMetaHighlight,
@@ -41,7 +41,16 @@ export default defineConfig({
 
         const md = fs.readFileSync(path, 'utf8')
         const { data } = matter(md)
-        route.meta = Object.assign(route.meta || {}, { frontmatter: { ...data, lastUpdateTime: getLastUpdateTime(path) } })
+        route.meta = Object.assign(
+          route.meta || {},
+          {
+            frontmatter: {
+              ...data,
+              lastUpdateTime: getLastUpdateTime(path),
+            },
+            filename: basename(path, '.md'),
+          },
+        )
 
         return route
       },

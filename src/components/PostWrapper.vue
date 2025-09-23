@@ -87,6 +87,18 @@ onMounted(() => {
     )
   }
 })
+
+const baseSourceLink = 'https://github.com/younggglcy/blog/tree/main'
+const sourceLink = computed(() => {
+  if (route.path === '/')
+    return baseSourceLink
+  const subPath = route.path === '/posts'
+    ? `${route.path}/index`
+    : route.path.startsWith('/posts/')
+      ? `/posts/${route.meta.filename}`
+      : `/${route.meta.filename}`
+  return `${baseSourceLink}/pages${subPath}.md`
+})
 </script>
 
 <template>
@@ -117,7 +129,7 @@ onMounted(() => {
       <BackToTop />
       <ProgressBar v-if="showProgress && articleEl" :el="articleEl" />
     </ClientOnly>
-    <FooterBar />
+    <FooterBar :source-link="sourceLink" />
   </div>
 </template>
 
