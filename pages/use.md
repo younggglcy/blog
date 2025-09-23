@@ -1,7 +1,5 @@
 [[toc]]
 
-# 我所使用的软硬件设备
-
 ## 数码设备
 
 - 手机: iPhone 14 Pro 256 GB / Redmi K30 Pro 至尊纪念版
@@ -40,3 +38,11 @@
 - [Folo](https://github.com/RSSNext/Folo)
 - [Stats](https://github.com/exelban/stats)
 - [Bob](https://github.com/ripperhe/Bob)
+
+## Awesome websits
+
+- [FontDrop](https://fontdrop.info/)
+- [npm-copare.com](https://npm-compare.com/)
+- [AST Explorer](https://astexplorer.net/)
+- [icones](https://icones.js.org/)
+- [regex101](https://regex101.com/)
