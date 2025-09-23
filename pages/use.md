@@ -26,6 +26,7 @@
 - [corepack](https://github.com/nodejs/corepack#readme)
 - [yalc](https://github.com/wclr/yalc)
 - [@antfu/ni](https://github.com/antfu-collective/ni)
+- [@antfu/nip](https://github.com/antfu/nip)
 - [@vscode/vsce](https://github.com/microsoft/vscode-vsce)
 - [npkill](https://github.com/voidcosmos/npkill)
 
