@@ -22,7 +22,7 @@ import ToggleTheme from './ToggleTheme.vue'
         </router-link>
         <router-link to="/projects" title="Projects">
           <span class="lt-sm:hidden darker">Projects</span>
-          <div ix:projects sm:hidden />
+          <div i-ix:projects sm:hidden />
         </router-link>
         <router-link to="/friends" title="friends' link" class="lt-sm:hidden">
           <span class="lt-sm:hidden darker">Friends</span>
@@ -30,7 +30,7 @@ import ToggleTheme from './ToggleTheme.vue'
         </router-link>
         <router-link to="/use" title="Use">
           <span class="lt-sm:hidden darker">Use</span>
-          <div clarity:tools-solid sm:hidden />
+          <div i-clarity:tools-solid sm:hidden />
         </router-link>
         <a href="https://github.com/younggglcy" target="_blank" title="GitHub">
           <div i-uil-github-alt />
