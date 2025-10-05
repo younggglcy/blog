@@ -11,6 +11,7 @@
   <a flex="~ items-center gap-1" href="https://www.instagram.com/younggglcy/" target="_blank"><span inline-block op75 i-simple-icons-instagram /> Instagram</a>
   <a flex="~ items-center gap-1" href="https://space.bilibili.com/74026182" target="_blank"><span inline-block op75 i-simple-icons-bilibili /> 哔哩哔哩</a>
   <a flex="~ items-center gap-1" href="https://www.zhihu.com/people/youngggglcy" target="_blank"><span inline-block op75 i-simple-icons-zhihu /> 知乎</a>
+  <a flex="~ items-center gap-1" target="_blank"><span inline-block op75 i-simple-icons:battledotnet /> superShovel #1911(美服)</a>
 </p>
 
 或者发[邮件](mailto:younggglcy@gmail.com)给我
