@@ -20,6 +20,10 @@ useHead({
       name: 'keywords',
       content: frontmatter.tags?.join(', '),
     },
+    {
+      name: 'description',
+      content: frontmatter.description,
+    },
   ],
 })
 
