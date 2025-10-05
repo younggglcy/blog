@@ -1,0 +1,38 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main rounded rectangle background -->
+  <rect width="128" height="128" rx="24" fill="url(#bgGradient)"/>
+  
+  <!-- Markdown "M" symbol with down arrow integrated -->
+  <path d="M 24 38 L 24 90 L 34 90 L 34 54 L 46 68 L 58 54 L 58 90 L 68 90 L 68 38 L 58 38 L 46 52 L 34 38 Z" 
+        fill="white" opacity="0.95"/>
+  
+  <!-- Code brackets with syntax highlighting dots -->
+  <path d="M 76 50 L 66 64 L 76 78" 
+        stroke="url(#accentGradient)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M 96 50 L 106 64 L 96 78" 
+        stroke="url(#accentGradient)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Syntax highlighting dots (representing colored code) -->
+  <circle cx="82" cy="58" r="2.5" fill="#4ade80"/>
+  <circle cx="90" cy="58" r="2.5" fill="#60a5fa"/>
+  <circle cx="82" cy="64" r="2.5" fill="#f87171"/>
+  <circle cx="90" cy="64" r="2.5" fill="#fbbf24"/>
+  <circle cx="82" cy="70" r="2.5" fill="#a78bfa"/>
+  <circle cx="90" cy="70" r="2.5" fill="#34d399"/>
+  
+  <!-- Sparkle/Extra indicator (top right corner) -->
+  <path d="M 108 24 L 110 30 L 116 32 L 110 34 L 108 40 L 106 34 L 100 32 L 106 30 Z" 
+        fill="#fbbf24" opacity="0.9"/>
+</svg>

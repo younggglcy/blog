@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MarkdownIt from 'markdown-it'
+import { vMarkdownIt } from '~/directives'
 
 const props = defineProps<{
   date: string
@@ -14,9 +14,6 @@ const props = defineProps<{
 defineEmits<{
   (e: 'tagClick', name: string): void
 }>()
-
-const md = new MarkdownIt()
-const desc = md.render(props.description)
 </script>
 
 <template>
@@ -32,7 +29,7 @@ const desc = md.render(props.description)
       <span flex items-center><i-bi:book mr-3 />{{ props.words }}</span>
       <span flex items-center><i-ep:timer mr-3 />{{ props.duration }}</span>
     </div>
-    <div class="prose mt-1" v-html="desc" />
+    <div v-markdown-it="props.description" class="prose mt-1" />
     <div flex items-center flex-wrap>
       <div v-for="tag of props.tags" :key="tag" flex items-center mt-4 class="basis-1/4">
         <i-carbon:tag-group hover:cursor-pointer @click="$emit('tagClick', tag)" />

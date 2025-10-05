@@ -11,6 +11,7 @@ import Anchor from 'markdown-it-anchor'
 import LinkAttributes from 'markdown-it-link-attributes'
 import TOC from 'markdown-it-table-of-contents'
 import Unocss from 'unocss/vite'
+import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
 import Components from 'unplugin-vue-components/vite'
@@ -64,7 +65,12 @@ export default defineConfig({
       ],
     }),
 
-    Icons(),
+    Icons({
+      compiler: 'vue3',
+      customCollections: {
+        local: FileSystemIconLoader('./src/assets/icons'),
+      },
+    }),
 
     Unocss(),
 
