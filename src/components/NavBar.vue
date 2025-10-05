@@ -20,6 +20,10 @@ import ToggleTheme from './ToggleTheme.vue'
           <span class="lt-sm:hidden darker">Blog</span>
           <div i-ri-article-line sm:hidden />
         </router-link>
+        <router-link to="/projects" title="Projects">
+          <span class="lt-sm:hidden darker">Projects</span>
+          <div ix:projects sm:hidden />
+        </router-link>
         <router-link to="/friends" title="friends' link" class="lt-sm:hidden">
           <span class="lt-sm:hidden darker">Friends</span>
           <div i-fa-solid:user-friends sm:hidden />
