@@ -53,3 +53,4 @@
 ### Tools
 
 - [bat](https://github.com/sharkdp/bat) - A cat(1) clone with wings.
+- [scc](https://github.com/boyter/scc) - Sloc, Cloc and Code: scc is a very fast accurate code counter with complexity calculations and COCOMO estimates written in pure Go
