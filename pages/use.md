@@ -21,16 +21,18 @@
 - IDE: VSCode，相关设置参考 https://github.com/younggglcy/dotfiles
 - 浏览器: Chrome
 
+## Awesomes
+
 ### Nodejs global packages
 
-- [corepack](https://github.com/nodejs/corepack#readme)
-- [yalc](https://github.com/wclr/yalc)
+- [corepack](https://github.com/nodejs/corepack)
+- [yalc](https://github.com/wclr/yalc) - Work with yarn/npm packages locally like a boss.
 - [@antfu/ni](https://github.com/antfu-collective/ni)
 - [@antfu/nip](https://github.com/antfu/nip)
 - [@vscode/vsce](https://github.com/microsoft/vscode-vsce)
 - [npkill](https://github.com/voidcosmos/npkill)
 
-## MacOS 应用
+### MacOS 应用
 
 - [LobeChat](https://github.com/lobehub/lobe-chat)
 - [Raycast](https://raycast.com)
@@ -40,10 +42,14 @@
 - [Stats](https://github.com/exelban/stats)
 - [Bob](https://github.com/ripperhe/Bob)
 
-## Awesome websits
+### Websits
 
 - [FontDrop](https://fontdrop.info/)
 - [npm-copare.com](https://npm-compare.com/)
 - [AST Explorer](https://astexplorer.net/)
 - [icones](https://icones.js.org/)
 - [regex101](https://regex101.com/)
+
+### Tools
+
+- [bat](https://github.com/sharkdp/bat) - A cat(1) clone with wings.
