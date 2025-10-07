@@ -7,7 +7,8 @@
     "build": "vue-tsc --noEmit && vite-ssg build && esno ./scripts/rss.ts",
     "preview": "vite preview",
     "lint": "eslint .",
-    "lint:fix": "pnpm lint --fix"
+    "lint:fix": "pnpm lint --fix",
+    "prepare": "husky"
   },
   "dependencies": {
     "@unhead/vue": "^2.0.3",
@@ -37,13 +38,13 @@
     "feed": "^5.0.0",
     "fs-extra": "^11.3.0",
     "gray-matter": "^4.0.3",
+    "husky": "^9.1.7",
     "lint-staged": "^16.0.0",
     "lodash-es": "^4.17.21",
     "markdown-it": "^14.1.0",
     "markdown-it-anchor": "^9.2.0",
     "markdown-it-link-attributes": "^4.0.1",
     "markdown-it-table-of-contents": "^1.0.0",
-    "simple-git-hooks": "^2.12.1",
     "typescript": "^5.8.2",
     "unocss": "^66.5.1",
     "unplugin-icons": "^22.1.0",
@@ -54,9 +55,6 @@
     "vite-plugin-pages": "^0.33.0",
     "vite-ssg": "^28.0.0",
     "vue-tsc": "^3.0.6"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm exec lint-staged"
   },
   "lint-staged": {
     "*": [
