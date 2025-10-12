@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import type { PackageVersionOptions } from '~/utils/package-versions'
 import { useDark } from '@vueuse/core'
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import MarkdownItShikiExtraIcon from '~icons/local/markdown-it-shiki-extra?raw'
 import { vMarkdownIt } from '~/directives'
+import { getPackageVersion, prefetchVersions } from '~/utils/package-versions'
 
 const isDark = useDark()
+const versions = ref<Record<string, string>>({})
 
 interface Project {
   name: string
@@ -13,41 +16,52 @@ interface Project {
   archived?: boolean
   icon: string
   iconType?: 'unocss' | 'url' | 'svg'
+  type?: 'npm' | 'vscode-extension'
+  id?: string
 }
 
-// FIXMe: https://unocss.dev/transformers/directives#icon
-const projects = computed(() => ([
-  {
-    name: 'Markdown-it-shiki-extra',
-    description: '[Markdown It](https://markdown-it.github.io/) plugin for [Shiki](https://github.com/shikijs/shiki) with extra options.',
-    icon: MarkdownItShikiExtraIcon,
-    iconType: 'svg' as const,
-    archived: true,
-    link: 'https://github.com/younggglcy/markdown-it-shiki-extra',
-  },
-  {
-    name: 'Simple Reminder',
-    description: 'A simple reminder for vscode',
-    icon: 'https://raw.githubusercontent.com/GODLiangCY/reminder/main/reminder.png',
-    iconType: 'url' as const,
-    archived: true,
-    link: 'https://github.com/younggglcy/reminder',
-  },
-  {
-    name: '@younggglcy/create-npm-lib',
-    description: 'My custom CLI tool for creating a npm library with a starter template',
-    icon: isDark.value ? 'i-skill-icons:npm-dark' : 'i-skill-icons:npm-light',
-    iconType: 'unocss' as const,
-    link: 'https://github.com/younggglcy/create-npm-lib',
-  },
-] as Project[])
-  .toSorted((a, b) => {
-    if (a.archived && !b.archived)
-      return 1
-    if (!a.archived && b.archived)
-      return -1
-    return 0
-  }))
+const projects = computed(() => {
+  const projectsData: Project[] = [
+    {
+      name: 'markdown-it-shiki-extra',
+      description: '[Markdown It](https://markdown-it.github.io/) plugin for [Shiki](https://github.com/shikijs/shiki) with extra options.',
+      icon: MarkdownItShikiExtraIcon,
+      iconType: 'svg' as const,
+      archived: true,
+      link: 'https://github.com/younggglcy/markdown-it-shiki-extra',
+      type: 'npm' as const,
+      id: 'markdown-it-shiki-extra',
+    },
+    {
+      name: 'Simple Reminder',
+      description: 'A simple reminder for vscode',
+      icon: 'https://raw.githubusercontent.com/GODLiangCY/reminder/main/reminder.png',
+      iconType: 'url' as const,
+      archived: true,
+      link: 'https://github.com/younggglcy/reminder',
+      type: 'vscode-extension' as const,
+      id: 'younggglcy.simple-routine-reminder',
+    },
+    {
+      name: '@younggglcy/create-npm-lib',
+      description: 'My custom CLI tool for creating a npm library with a starter template',
+      icon: isDark.value ? 'i-skill-icons:npm-dark' : 'i-skill-icons:npm-light',
+      iconType: 'unocss' as const,
+      link: 'https://github.com/younggglcy/create-npm-lib',
+      type: 'npm' as const,
+      id: '@younggglcy/create-npm-lib',
+    },
+  ]
+
+  return projectsData
+    .toSorted((a, b) => {
+      if (a.archived && !b.archived)
+        return 1
+      if (!a.archived && b.archived)
+        return -1
+      return 0
+    })
+})
 
 function handleClick(link: string, event: MouseEvent) {
   // 如果点击的是链接，不执行卡片的点击事件
@@ -59,6 +73,36 @@ function handleClick(link: string, event: MouseEvent) {
 }
 
 const iconClass = 'icon-container w-14 h-14 flex-shrink-0 rounded-lg bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-2 group-hover:scale-110 transition-transform duration-300'
+
+// Fetch versions on mount
+onMounted(async () => {
+  // Prepare version fetch options
+  const versionFetchOptions: PackageVersionOptions[] = projects.value
+    .filter(p => p.type && p.id)
+    .map(p => ({
+      type: p.type!,
+      id: p.id!,
+    }))
+
+  // Prefetch all versions
+  await prefetchVersions(versionFetchOptions)
+
+  // Get versions and store them
+  const versionPromises = versionFetchOptions.map(async (option) => {
+    const version = await getPackageVersion(option)
+    return { key: option.id, version }
+  })
+
+  const results = await Promise.all(versionPromises)
+  const versionMap: Record<string, string> = {}
+  results.forEach(({ key, version }) => {
+    if (version) {
+      versionMap[key] = version
+    }
+  })
+
+  versions.value = versionMap
+})
 </script>
 
 <template>
@@ -69,6 +113,11 @@ const iconClass = 'icon-container w-14 h-14 flex-shrink-0 rounded-lg bg-gradient
       class="project-card group p-5 rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-300 hover:shadow-lg cursor-pointer bg-white dark:bg-gray-800/30"
       @click="handleClick(project.link, $event)"
     >
+      <!-- Version badge at top right -->
+      <div v-if="versions[project.id!] && project.type" class="version-badge">
+        <span class="version-label">v{{ versions[project.id!] }}</span>
+      </div>
+
       <div class="flex items-center gap-4">
         <div v-if="project.iconType === 'url'" :class="iconClass">
           <img :src="project.icon" alt="" class="w-full h-full object-contain">
@@ -133,6 +182,47 @@ const iconClass = 'icon-container w-14 h-14 flex-shrink-0 rounded-lg bg-gradient
 
 .project-card:hover {
   transform: translateY(-4px);
+}
+
+.version-badge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 10;
+}
+
+.version-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  letter-spacing: 0.025em;
+  /* Light mode styling */
+  color: #5b21b6;
+  background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%);
+  box-shadow: 0 2px 6px rgba(91, 33, 182, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.version-label:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(91, 33, 182, 0.25);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.dark .version-label {
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.5);
+  border: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+.dark .version-label:hover {
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.6);
+  border-color: rgba(102, 126, 234, 0.5);
 }
 
 .project-description {
