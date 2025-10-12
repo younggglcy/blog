@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import { useDark } from '@vueuse/core'
+import { computed } from 'vue'
 import MarkdownItShikiExtraIcon from '~icons/local/markdown-it-shiki-extra?raw'
 import { vMarkdownIt } from '~/directives'
+
+const isDark = useDark()
 
 interface Project {
   name: string
@@ -8,13 +12,16 @@ interface Project {
   link: string
   archived?: boolean
   icon: string
+  iconType?: 'unocss' | 'url' | 'svg'
 }
 
-let projects: Project[] = [
+// FIXMe: https://unocss.dev/transformers/directives#icon
+const projects = computed(() => ([
   {
     name: 'Markdown-it-shiki-extra',
     description: '[Markdown It](https://markdown-it.github.io/) plugin for [Shiki](https://github.com/shikijs/shiki) with extra options.',
     icon: MarkdownItShikiExtraIcon,
+    iconType: 'svg' as const,
     archived: true,
     link: 'https://github.com/younggglcy/markdown-it-shiki-extra',
   },
@@ -22,18 +29,25 @@ let projects: Project[] = [
     name: 'Simple Reminder',
     description: 'A simple reminder for vscode',
     icon: 'https://raw.githubusercontent.com/GODLiangCY/reminder/main/reminder.png',
+    iconType: 'url' as const,
     archived: true,
     link: 'https://github.com/younggglcy/reminder',
   },
-]
-
-projects = projects.toSorted((a, b) => {
-  if (a.archived && !b.archived)
-    return 1
-  if (!a.archived && b.archived)
-    return -1
-  return 0
-})
+  {
+    name: '@younggglcy/create-npm-lib',
+    description: 'My custom CLI tool for creating a npm library with a starter template',
+    icon: isDark.value ? 'i-skill-icons:npm-dark' : 'i-skill-icons:npm-light',
+    iconType: 'unocss' as const,
+    link: 'https://github.com/younggglcy/create-npm-lib',
+  },
+] as Project[])
+  .toSorted((a, b) => {
+    if (a.archived && !b.archived)
+      return 1
+    if (!a.archived && b.archived)
+      return -1
+    return 0
+  }))
 
 function handleClick(link: string, event: MouseEvent) {
   // 如果点击的是链接，不执行卡片的点击事件
@@ -56,8 +70,11 @@ const iconClass = 'icon-container w-14 h-14 flex-shrink-0 rounded-lg bg-gradient
       @click="handleClick(project.link, $event)"
     >
       <div class="flex items-center gap-4">
-        <div v-if="project.icon.startsWith('http')" :class="iconClass">
+        <div v-if="project.iconType === 'url'" :class="iconClass">
           <img :src="project.icon" alt="" class="w-full h-full object-contain">
+        </div>
+        <div v-else-if="project.iconType === 'unocss'" :class="iconClass">
+          <div :class="project.icon" w-14 h-14 />
         </div>
         <div v-else :class="iconClass" v-html="project.icon" />
         <div class="flex-1 min-w-0">
