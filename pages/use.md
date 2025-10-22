@@ -41,6 +41,7 @@
 - [Folo](https://github.com/RSSNext/Folo)
 - [Stats](https://github.com/exelban/stats)
 - [Bob](https://github.com/ripperhe/Bob)
+- [Ice](https://github.com/jordanbaird/Ice) - Powerful menu bar manager for macOS
 
 ### Websits
 
