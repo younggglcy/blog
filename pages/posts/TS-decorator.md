@@ -10,6 +10,8 @@ duration: '15 mins'
 description: '本文分入门、进阶、深入三个章节，循序渐进地介绍了 TypeScript 中装饰器的原理与实现，希望能对读者有所启发'
 ---
 
+[[toc]]
+
 # 入门：了解装饰器
 
 > 本章节首发于同事 [xcatliu](https://github.com/xcatliu) 的 [TypeScript 入门教程](https://ts.xcatliu.com/)，欢迎想了解或想对 TypeScript 有更深理解的你阅读~
