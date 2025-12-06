@@ -36,6 +36,7 @@ export default defineConfig({
       dirs: [
         { dir: './pages', baseRoute: '' },
         { dir: './pages/posts', baseRoute: 'posts' },
+        { dir: './pages/monthly', baseRoute: 'monthly' },
       ],
       extendRoute(route) {
         const path = resolve(__dirname, route.component.slice(1))
