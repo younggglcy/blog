@@ -32,7 +32,9 @@ const allPagesRoutes = computed(() => {
   return router.getRoutes()
     .filter(({ path }) => path.startsWith(routePrefix) && path !== routePrefix)
     .sort((a, b) => {
-      return parseDate(b.meta.frontmatter?.date || '') - parseDate(a.meta.frontmatter?.date || '')
+      const dateB = b.meta.frontmatter?.date ? parseDate(b.meta.frontmatter.date) : 0
+      const dateA = a.meta.frontmatter?.date ? parseDate(a.meta.frontmatter.date) : 0
+      return dateB - dateA
     })
     .map(i => ({
       ...i.meta.frontmatter,
