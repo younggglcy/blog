@@ -96,11 +96,11 @@ const baseSourceLink = 'https://github.com/younggglcy/blog/tree/main'
 const sourceLink = computed(() => {
   if (route.path === '/')
     return baseSourceLink
-  const subPath = route.path === '/posts'
-    ? `${route.path}/index`
-    : route.path.startsWith('/posts/')
-      ? `/posts/${route.meta.filename}`
-      : `/${route.meta.filename}`
+  if (route.path === '/posts' || route.path === '/monthly')
+    return `${baseSourceLink}/pages/${route.path}/index.md`
+  const routesArr = route.path.split('/').slice(0, -1)
+  routesArr.push(route.meta.filename)
+  const subPath = routesArr.join('/')
   return `${baseSourceLink}/pages${subPath}.md`
 })
 </script>
