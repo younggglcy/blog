@@ -3,12 +3,12 @@ import { vMarkdownIt } from '~/directives'
 
 const props = defineProps<{
   date: string
-  duration: string
+  duration?: string
   path: string
   title: string
   description: string
   tags: string[]
-  words: number
+  words?: number
 }>()
 
 defineEmits<{
@@ -25,9 +25,9 @@ defineEmits<{
       <h2>{{ props.title }}</h2>
     </router-link>
     <div flex items-center justify-between>
-      <span flex items-center><i-ant-design:calendar-twotone mr-3 />{{ props.date }}</span>
-      <span flex items-center><i-bi:book mr-3 />{{ props.words }}</span>
-      <span flex items-center><i-ep:timer mr-3 />{{ props.duration }}</span>
+      <span v-if="props.date" flex items-center><i-ant-design:calendar-twotone mr-3 />{{ props.date }}</span>
+      <span v-if="props.words" flex items-center><i-bi:book mr-3 />{{ props.words }}</span>
+      <span v-if="props.duration" flex items-center><i-ep:timer mr-3 />{{ props.duration }}</span>
     </div>
     <div v-markdown-it="props.description" class="prose mt-1" />
     <div flex items-center flex-wrap>

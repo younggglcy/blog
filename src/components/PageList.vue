@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { Post } from '~/types'
 import { computed, ref, unref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { vInfiniteScroll } from '~/directives'
 import { parseDate } from '~/lib/day'
-import PostItem from './PostItem.vue'
+import PageItem from './PageItem.vue'
 
+const route = useRoute()
 const router = useRouter()
 
 const tags = ref<string[]>([])
@@ -25,30 +25,37 @@ function deselectTag(idx: number) {
   tags.value.splice(idx, 1)
 }
 
-const allPostsRoutes: Post[] = router.getRoutes()
-  .filter(i => i.path.match(/^\/posts\/.*$/))
-  .sort((a, b) => {
-    return parseDate(b.meta.frontmatter.date) - parseDate(a.meta.frontmatter.date)
-  })
-  .map(i => ({
-    ...i.meta.frontmatter,
-    path: i.path,
-  }))
+const allPagesRoutes = computed(() => {
+  // 获取当前路由的基础前缀（posts 或 monthly）
+  const routePrefix = route.matched[0]?.path || ''
 
-const allPostsNum = allPostsRoutes.length
+  return router.getRoutes()
+    .filter(({ path }) => path.startsWith(routePrefix) && path !== routePrefix)
+    .sort((a, b) => {
+      const dateB = b.meta.frontmatter?.date ? parseDate(b.meta.frontmatter.date) : 0
+      const dateA = a.meta.frontmatter?.date ? parseDate(a.meta.frontmatter.date) : 0
+      return dateB - dateA
+    })
+    .map(i => ({
+      ...i.meta.frontmatter,
+      path: i.path,
+    }))
+})
+
+const allPagesNum = computed(() => allPagesRoutes.value.length)
 
 function load() {
-  if (initialNum.value + 2 <= allPostsNum) {
+  if (initialNum.value + 2 <= allPagesNum.value) {
     initialNum.value += 2
   }
   else {
-    initialNum.value = allPostsNum
+    initialNum.value = allPagesNum.value
   }
 }
 
-const posts = computed(() => {
-  return allPostsRoutes
-    .filter(i => tags.value.every(tag => i.tags.includes(tag)))
+const pages = computed(() => {
+  return allPagesRoutes.value
+    .filter(i => tags.value.every(tag => i.tags?.includes(tag)))
     .slice(0, initialNum.value)
 })
 </script>
@@ -65,7 +72,7 @@ const posts = computed(() => {
       </span>
     </div>
     <main v-infinite-scroll="load" overflow-auto>
-      <PostItem v-for="post in posts" :key="post.path" v-bind="post" @tag-click="selectTag" />
+      <PageItem v-for="page in pages" :key="page.path" v-bind="page" @tag-click="selectTag" />
     </main>
   </div>
 </template>

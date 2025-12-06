@@ -1,5 +1,5 @@
 ---
-title: 'Blogs'
+title: '月记'
 ---
 
 <PageList />
