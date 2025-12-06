@@ -76,7 +76,7 @@ export default defineConfig({
     Unocss(),
 
     MarkDown({
-      wrapperComponent: 'PostWrapper',
+      wrapperComponent: 'PageWrapper',
       wrapperClasses: 'prose m-auto',
       headEnabled: true,
       markdownItOptions: {

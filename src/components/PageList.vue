@@ -3,7 +3,7 @@ import { computed, ref, unref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { vInfiniteScroll } from '~/directives'
 import { parseDate } from '~/lib/day'
-import PostItem from './PostItem.vue'
+import PageItem from './PageItem.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -25,7 +25,7 @@ function deselectTag(idx: number) {
   tags.value.splice(idx, 1)
 }
 
-const allPostsRoutes = computed(() => {
+const allPagesRoutes = computed(() => {
   // 获取当前路由的基础前缀（posts 或 monthly）
   const routePrefix = route.matched[0]?.path || ''
 
@@ -40,19 +40,19 @@ const allPostsRoutes = computed(() => {
     }))
 })
 
-const allPostsNum = computed(() => allPostsRoutes.value.length)
+const allPagesNum = computed(() => allPagesRoutes.value.length)
 
 function load() {
-  if (initialNum.value + 2 <= allPostsNum.value) {
+  if (initialNum.value + 2 <= allPagesNum.value) {
     initialNum.value += 2
   }
   else {
-    initialNum.value = allPostsNum.value
+    initialNum.value = allPagesNum.value
   }
 }
 
-const posts = computed(() => {
-  return allPostsRoutes.value
+const pages = computed(() => {
+  return allPagesRoutes.value
     .filter(i => tags.value.every(tag => i.tags?.includes(tag)))
     .slice(0, initialNum.value)
 })
@@ -70,7 +70,7 @@ const posts = computed(() => {
       </span>
     </div>
     <main v-infinite-scroll="load" overflow-auto>
-      <PostItem v-for="post in posts" :key="post.path" v-bind="post" @tag-click="selectTag" />
+      <PageItem v-for="page in pages" :key="page.path" v-bind="page" @tag-click="selectTag" />
     </main>
   </div>
 </template>
