@@ -34,14 +34,12 @@
 
 ### MacOS 应用
 
-- [LobeChat](https://github.com/lobehub/lobe-chat)
+- [Cherry Studio](https://github.com/CherryHQ/cherry-studio)
 - [Raycast](https://raycast.com)
 - [Shottr](https://shottr.cc)
 - [Maccy](https://github.com/p0deje/Maccy)
-- [Folo](https://github.com/RSSNext/Folo)
 - [Stats](https://github.com/exelban/stats)
 - [Bob](https://github.com/ripperhe/Bob)
-- [Ice](https://github.com/jordanbaird/Ice) - Powerful menu bar manager for macOS
 
 ### Websits
 
