@@ -34,9 +34,9 @@ const route = useRoute()
 // so I put time on here
 const lastUpdateTime = route.meta.frontmatter.lastUpdateTime
 
-const isPostsRoute = route.path.match(/^\/posts\/.+/)
+const isPagesRoute = route.path.match(/^\/(posts|monthly)\/.+/)
 
-const showProgress = isPostsRoute && frontmatter.withProgress !== false
+const showProgress = isPagesRoute && frontmatter.withProgress !== false
 
 const articleEl = ref<null | HTMLElement>(null)
 
@@ -54,7 +54,7 @@ onMounted(() => {
     })
   }
   const toc = document.querySelector('article .table-of-contents')
-  if (isPostsRoute && toc) {
+  if (isPagesRoute && toc) {
     const lists = Array.from(toc.querySelectorAll<HTMLAnchorElement>('li > a'))
 
     // highlight current title
