@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import { execaCommandSync } from 'execa'
 
 export function getLastUpdateTime(filePath: string) {
-  if (!/\/posts\/(?!index)/.test(filePath))
+  if (!/\/(?:posts|monthly)\/(?!index)/.test(filePath))
     return ''
   const { stdout, stderr } = execaCommandSync(`git log ${filePath}`)
   if (stderr)
