@@ -43,7 +43,7 @@ html {
 
 h2 + p > em:first-child {
   opacity: 0.5;
-  display: block;
+  /* display: block; */
   margin-top: -20px;
   font-size: 0.9em;
 }
