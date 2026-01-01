@@ -31,10 +31,16 @@ export function mdImageSize(): Plugin {
 
         try {
           const imgPath = resolve(mdDir, src)
-          const dimensions = await imageSizeFromFile(imgPath)
+          const imgSize = await imageSizeFromFile(imgPath)
+          let { width, height } = imgSize
 
-          if (dimensions.width && dimensions.height) {
-            output += `<img ${before}src="${src}" style="height: auto;" width="${dimensions.width}" height="${dimensions.height}"${after}>`
+          // https://jpegclub.org/exif_orientation.html
+          if (imgSize.orientation && [5, 6, 7, 8].includes(imgSize.orientation)) {
+            ;[width, height] = [height, width]
+          }
+
+          if (width && height) {
+            output += `<img ${before}src="${src}" style="height: auto;" width="${imgSize.width}" height="${imgSize.height}"${after}>`
             continue
           }
         }
