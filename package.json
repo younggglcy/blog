@@ -39,6 +39,7 @@
     "fs-extra": "catalog:",
     "gray-matter": "catalog:",
     "husky": "catalog:",
+    "image-size": "catalog:",
     "lint-staged": "catalog:",
     "lodash-es": "catalog:",
     "markdown-it": "catalog:",

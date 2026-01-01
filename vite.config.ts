@@ -19,6 +19,7 @@ import MarkDown from 'unplugin-vue-markdown/vite'
 import { defineConfig } from 'vite'
 import Inspect from 'vite-plugin-inspect'
 import Pages from 'vite-plugin-pages'
+import { mdImageSize } from './plugins/vite-plugin-md-image-size'
 import { slugify } from './scripts/slugify'
 import { getLastUpdateTime } from './scripts/utils'
 
@@ -26,6 +27,8 @@ import { getLastUpdateTime } from './scripts/utils'
 export default defineConfig({
   plugins: [
     Inspect(),
+
+    mdImageSize(),
 
     Vue({
       include: [/\.vue$/, /\.md$/],
@@ -43,6 +46,7 @@ export default defineConfig({
 
         const md = fs.readFileSync(path, 'utf8')
         const { data } = matter(md)
+
         route.meta = Object.assign(
           route.meta || {},
           {
