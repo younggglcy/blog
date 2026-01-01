@@ -40,7 +40,7 @@ export function mdImageSize(): Plugin {
           }
 
           if (width && height) {
-            output += `<img ${before}src="${src}" style="height: auto;" width="${imgSize.width}" height="${imgSize.height}"${after}>`
+            output += `<img ${before}src="${src}" style="height: auto;" width="${width}" height="${height}"${after}>`
             continue
           }
         }
