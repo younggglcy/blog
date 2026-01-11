@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@unhead/vue": "catalog:",
+    "@vercel/analytics": "catalog:",
     "@vercel/speed-insights": "catalog:",
     "dayjs": "catalog:",
     "vue": "catalog:",
