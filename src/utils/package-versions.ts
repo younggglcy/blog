@@ -2,8 +2,9 @@
 const versionCache = new Map<string, string>()
 
 export interface PackageVersionOptions {
-  type: 'npm' | 'vscode-extension'
+  type: 'npm' | 'vscode-extension' | 'mac-app'
   id: string
+  repo?: string // GitHub repo in format "owner/repo" for mac-app type
 }
 
 /**
@@ -70,6 +71,26 @@ async function fetchVSCodeExtensionVersion(extensionId: string): Promise<string>
 }
 
 /**
+ * Fetch the latest version from GitHub Releases
+ */
+async function fetchGitHubReleaseVersion(repo: string): Promise<string> {
+  try {
+    const response = await fetch(`https://api.github.com/repos/${repo}/releases/latest`)
+    if (!response.ok) {
+      console.warn(`Failed to fetch GitHub release version for ${repo}`)
+      return ''
+    }
+    const data = await response.json()
+    // Remove 'v' prefix if present (e.g., 'v0.3.0' -> '0.3.0')
+    return data.tag_name?.replace(/^v/, '') || ''
+  }
+  catch (error) {
+    console.warn(`Error fetching GitHub release version for ${repo}:`, error)
+    return ''
+  }
+}
+
+/**
  * Fetch package version with caching
  */
 export async function getPackageVersion(options: PackageVersionOptions): Promise<string> {
@@ -87,6 +108,9 @@ export async function getPackageVersion(options: PackageVersionOptions): Promise
   }
   else if (options.type === 'vscode-extension') {
     version = await fetchVSCodeExtensionVersion(options.id)
+  }
+  else if (options.type === 'mac-app' && options.repo) {
+    version = await fetchGitHubReleaseVersion(options.repo)
   }
 
   // Cache the result

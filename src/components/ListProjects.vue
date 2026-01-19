@@ -16,8 +16,9 @@ interface Project {
   archived?: boolean
   icon: string
   iconType?: 'unocss' | 'url' | 'svg'
-  type?: 'npm' | 'vscode-extension'
+  type?: 'npm' | 'vscode-extension' | 'mac-app'
   id?: string
+  repo?: string // GitHub repo in format "owner/repo" for mac-app type
 }
 
 const projects = computed(() => {
@@ -51,6 +52,16 @@ const projects = computed(() => {
       type: 'npm' as const,
       id: '@younggglcy/create-npm-lib',
     },
+    {
+      name: 'OfficeViewer',
+      description: `Finder 'Open With' utility for macOS that unpacks Office files (.docx, .xlsx, .pptx) and opens the extracted folder in your editor.`,
+      icon: 'https://raw.githubusercontent.com/younggglcy/OfficeViewer/refs/heads/main/OfficeViewer/Assets.xcassets/AppIcon.appiconset/icon_128x128%402x.png',
+      iconType: 'url' as const,
+      link: 'https://github.com/younggglcy/OfficeViewer',
+      type: 'mac-app' as const,
+      id: 'com.younggglcy.OfficeViewer',
+      repo: 'younggglcy/OfficeViewer',
+    },
   ]
 
   return projectsData
@@ -82,6 +93,7 @@ onMounted(async () => {
     .map(p => ({
       type: p.type!,
       id: p.id!,
+      repo: p.repo,
     }))
 
   // Prefetch all versions
