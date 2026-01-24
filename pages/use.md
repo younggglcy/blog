@@ -20,6 +20,13 @@
 
 - IDE: VSCode，相关设置参考 https://github.com/younggglcy/dotfiles
 - 浏览器: Chrome
+- AI Coding
+  - Agents
+    - Claude Code
+    - Codex
+  - GUI Tool
+    - [Conductor](https://www.conductor.build/)
+    - [Superset](https://github.com/superset-sh/superset)
 
 ## Awesomes
 
