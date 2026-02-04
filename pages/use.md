@@ -3,7 +3,7 @@
 ## 数码设备
 
 - 手机: iPhone 14 Pro 256 GB / Redmi K30 Pro 至尊纪念版
-- iPad: iPad Air M2 512 GB 11'
+- ~~iPad: iPad Air M2 512 GB 11'~~
 - 手表: Apple Watch Series 8 (GPS), 45 mm
 - 耳机: AirPods Pro / Sony WH-1000XM3
 - 键盘: Keychron K3 Pro 黑色 - A1 白光红轴 / Keychron K3 Pro 黑色 - 红轴
