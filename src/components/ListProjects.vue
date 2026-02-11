@@ -5,6 +5,7 @@ import { computed, onMounted, ref } from 'vue'
 import MarkdownItShikiExtraIcon from '~icons/local/markdown-it-shiki-extra?raw'
 import { vMarkdownIt } from '~/directives'
 import { getPackageVersion, prefetchVersions } from '~/utils/package-versions'
+import ZenBarIcon from '../assets/icons/zenbar_icon.png'
 
 const isDark = useDark()
 const versions = ref<Record<string, string>>({})
@@ -61,6 +62,16 @@ const projects = computed(() => {
       type: 'mac-app' as const,
       id: 'com.younggglcy.OfficeViewer',
       repo: 'younggglcy/OfficeViewer',
+    },
+    {
+      name: 'ZenBar',
+      description: 'Effortlessly declutter by dragging icons under the ZenBar anchor. Reveal your hidden apps in a clean, floating list with a single click. Minimalist, native, and distraction-free.',
+      icon: ZenBarIcon,
+      iconType: 'url' as const,
+      link: 'https://github.com/younggglcy/ZenBar',
+      type: 'mac-app' as const,
+      id: 'com.younggglcy.ZenBar',
+      repo: 'younggglcy/ZenBar',
     },
   ]
 
