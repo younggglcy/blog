@@ -162,7 +162,6 @@ onMounted(async () => {
   padding: 0.875rem 0;
   text-decoration: none;
   color: inherit;
-  transition: opacity 0.2s;
   border-bottom: 1px dashed rgba(125, 125, 125, 0.15);
 }
 
@@ -170,8 +169,9 @@ onMounted(async () => {
   border-bottom: none;
 }
 
-.project-item:hover {
-  opacity: 0.7;
+.project-item:hover .project-name {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 .project-icon {
