@@ -19,7 +19,7 @@ interface Project {
   iconType?: 'unocss' | 'url' | 'svg'
   type?: 'npm' | 'vscode-extension' | 'mac-app'
   id?: string
-  repo?: string // GitHub repo in format "owner/repo" for mac-app type
+  repo?: string
 }
 
 const projects = computed(() => {
@@ -86,19 +86,13 @@ const projects = computed(() => {
 })
 
 function handleClick(link: string, event: MouseEvent) {
-  // 如果点击的是链接，不执行卡片的点击事件
   const target = event.target as HTMLElement
-  if (target.tagName === 'A' || target.closest('a')) {
+  if (target.tagName === 'A' || target.closest('a'))
     return
-  }
   window.open(link, '_blank')
 }
 
-const iconClass = 'icon-container w-14 h-14 flex-shrink-0 rounded-lg bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-2 group-hover:scale-110 transition-transform duration-300'
-
-// Fetch versions on mount
 onMounted(async () => {
-  // Prepare version fetch options
   const versionFetchOptions: PackageVersionOptions[] = projects.value
     .filter(p => p.type && p.id)
     .map(p => ({
@@ -107,181 +101,143 @@ onMounted(async () => {
       repo: p.repo,
     }))
 
-  // Prefetch all versions
   await prefetchVersions(versionFetchOptions)
 
-  // Get versions and store them
-  const versionPromises = versionFetchOptions.map(async (option) => {
-    const version = await getPackageVersion(option)
-    return { key: option.id, version }
-  })
+  const results = await Promise.all(
+    versionFetchOptions.map(async (option) => {
+      const version = await getPackageVersion(option)
+      return { key: option.id, version }
+    }),
+  )
 
-  const results = await Promise.all(versionPromises)
   const versionMap: Record<string, string> = {}
   results.forEach(({ key, version }) => {
-    if (version) {
+    if (version)
       versionMap[key] = version
-    }
   })
-
   versions.value = versionMap
 })
 </script>
 
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div
+  <div class="project-list">
+    <a
       v-for="project in projects"
       :key="project.name"
-      class="project-card group p-5 rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-300 hover:shadow-lg cursor-pointer bg-white dark:bg-gray-800/30"
+      class="project-item"
+      :href="project.link"
+      target="_blank"
       @click="handleClick(project.link, $event)"
     >
-      <!-- Version badge at top right -->
-      <div v-if="versions[project.id!] && project.type" class="version-badge">
-        <span class="version-label">v{{ versions[project.id!] }}</span>
+      <div class="project-icon">
+        <img v-if="project.iconType === 'url'" :src="project.icon" alt="">
+        <div v-else-if="project.iconType === 'unocss'" :class="project.icon" />
+        <div v-else class="project-icon-svg" v-html="project.icon" />
       </div>
-
-      <div class="flex items-center gap-4">
-        <div v-if="project.iconType === 'url'" :class="iconClass">
-          <img :src="project.icon" alt="" class="w-full h-full object-contain">
+      <div class="project-info">
+        <div class="project-header">
+          <span class="project-name">{{ project.name }}</span>
+          <span v-if="versions[project.id!]" class="project-version">v{{ versions[project.id!] }}</span>
+          <span v-if="project.archived" class="project-archived">archived</span>
         </div>
-        <div v-else-if="project.iconType === 'unocss'" :class="iconClass">
-          <div :class="project.icon" w-14 h-14 />
-        </div>
-        <div v-else :class="iconClass" v-html="project.icon" />
-        <div class="flex-1 min-w-0">
-          <div class="flex items-center gap-2 mb-1">
-            <h3 class="text-lg font-bold m-0 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-              {{ project.name }}
-            </h3>
-            <span v-if="project.archived" class="text-xs px-2 py-0.5 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-800">
-              Archived
-            </span>
-          </div>
-          <div
-            v-markdown-it="project.description"
-            class="prose project-description"
-          />
-        </div>
+        <div
+          v-markdown-it="project.description"
+          class="prose project-description"
+        />
       </div>
-    </div>
+    </a>
   </div>
 </template>
 
 <style scoped>
-.icon-container {
+.project-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  padding: 0.875rem 0;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s;
+  border-bottom: 1px dashed rgba(125, 125, 125, 0.15);
+}
+
+.project-item:last-child {
+  border-bottom: none;
+}
+
+.project-item:hover {
+  opacity: 0.7;
+}
+
+.project-icon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 0.125rem;
 }
 
-.icon-container :deep(svg) {
+.project-icon img {
   width: 100%;
   height: 100%;
-  display: block;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  object-fit: contain;
+  border-radius: 0.375rem;
 }
 
-.project-card {
-  position: relative;
-  overflow: hidden;
+.project-icon :deep(svg) {
+  width: 100%;
+  height: 100%;
 }
 
-.project-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
+.project-icon > div {
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
-.project-card:hover::before {
-  transform: scaleX(1);
+.project-info {
+  flex: 1;
+  min-width: 0;
 }
 
-.project-card:hover {
-  transform: translateY(-4px);
+.project-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
-.version-badge {
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  z-index: 10;
-}
-
-.version-label {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.25rem 0.625rem;
-  font-size: 0.75rem;
+.project-name {
   font-weight: 600;
-  border-radius: 9999px;
-  transition: all 0.3s ease;
-  letter-spacing: 0.025em;
-  /* Light mode styling */
-  color: #5b21b6;
-  background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%);
-  box-shadow: 0 2px 6px rgba(91, 33, 182, 0.15);
-  border: 1px solid rgba(139, 92, 246, 0.2);
+  font-size: 1rem;
 }
 
-.version-label:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(91, 33, 182, 0.25);
-  border-color: rgba(139, 92, 246, 0.3);
+.project-version {
+  font-size: 0.75rem;
+  opacity: 0.5;
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
 }
 
-.dark .version-label {
-  color: white;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.5);
-  border: 1px solid rgba(102, 126, 234, 0.3);
-}
-
-.dark .version-label:hover {
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.6);
-  border-color: rgba(102, 126, 234, 0.5);
+.project-archived {
+  font-size: 0.75rem;
+  opacity: 0.4;
+  font-style: italic;
 }
 
 .project-description {
-  opacity: 0.75;
+  opacity: 0.6;
   font-size: 0.875rem;
   line-height: 1.5;
-  margin-top: 0.25rem;
+  margin-top: 0.125rem;
 }
 
 .project-description :deep(p) {
   margin: 0;
-  line-height: 1.5;
-}
-
-.project-description :deep(a) {
-  text-decoration: none;
-  color: #3b82f6;
-  font-weight: 500;
-  position: relative;
-  transition: color 0.2s ease;
-}
-
-.dark .project-description :deep(a) {
-  color: #60a5fa;
-}
-
-.project-description :deep(a:hover) {
-  color: #2563eb;
-  text-decoration: underline;
-}
-
-.dark .project-description :deep(a:hover) {
-  color: #93c5fd;
-}
-
-h3 {
-  line-height: 1.3;
 }
 </style>
