@@ -141,6 +141,8 @@ export default defineConfig({
       '@vueuse/core',
       'dayjs',
       'dayjs/plugin/customParseFormat',
+      '@unhead/vue',
+      'lodash-es',
     ],
   },
 })
