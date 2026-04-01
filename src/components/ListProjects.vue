@@ -73,6 +73,15 @@ const projects = computed(() => {
       id: 'com.younggglcy.ZenBar',
       repo: 'younggglcy/ZenBar',
     },
+    {
+      name: 'tsgo-ast',
+      description: 'Expose [typescript-go](https://github.com/microsoft/typescript-go)\'s parser to JS/TS via WASM.',
+      icon: 'https://raw.githubusercontent.com/younggglcy/tsgo-ast/7bbdc7bdeddc80280c55c734b7104bae88d63cbd/logos/icon.svg',
+      iconType: 'url' as const,
+      link: 'https://github.com/younggglcy/tsgo-ast',
+      type: 'npm' as const,
+      id: 'tsgo-ast',
+    },
   ]
 
   return projectsData
