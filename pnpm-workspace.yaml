@@ -38,7 +38,7 @@ catalog:
   markdown-it-anchor: ^9.2.0
   markdown-it-link-attributes: ^4.0.1
   markdown-it-table-of-contents: ^1.2.0
-  typescript: ^5.9.3
+  typescript: ^6.0.3
   unocss: ^66.7.3
   unplugin-icons: ^22.5.0
   unplugin-vue-components: ^32.1.0
