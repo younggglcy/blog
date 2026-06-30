@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.33.2",
+  "packageManager": "pnpm@10.34.4",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite-ssg build && esno ./scripts/rss.ts",
